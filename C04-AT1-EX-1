@@ -1,0 +1,29 @@
+# RASIKA C(192421199)
+n = int(input("Enter the number of vertices: "))
+print("Enter the adjacency matrix:")
+graph = []
+for i in range(n):
+    row = list(map(int, input().split()))
+    graph.append(row)
+selected = [False] * n
+selected[0] = True
+edges = 0
+total_weight = 0
+print("\nEdges in the Minimum Spanning Tree:")
+while edges < n - 1:
+    minimum = 999
+    x = 0
+    y = 0
+    for i in range(n):
+        if selected[i]:
+            for j in range(n):
+                if (not selected[j]) and graph[i][j]:
+                    if graph[i][j] < minimum:
+                        minimum = graph[i][j]
+                        x = i
+                        y = j
+    print(x, "-", y, ":", graph[x][y])
+    total_weight += graph[x][y]
+    selected[y] = True
+    edges += 1
+print("Total Weight =", total_weight)
