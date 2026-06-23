@@ -1,0 +1,43 @@
+# RASIKA C(192421199)
+def find(parent, i):
+    if parent[i] != i:
+        parent[i] = find(parent, parent[i])
+    return parent[i]
+def union(parent, rank, x, y):
+    xroot = find(parent, x)
+    yroot = find(parent, y)
+
+    if rank[xroot] < rank[yroot]:
+        parent[xroot] = yroot
+    elif rank[xroot] > rank[yroot]:
+        parent[yroot] = xroot
+    else:
+        parent[yroot] = xroot
+        rank[xroot] += 1
+V = 4
+edges = [
+    (0, 1, 2),
+    (0, 2, 3),
+    (1, 2, 1),
+    (1, 3, 4),
+    (2, 3, 50)
+]
+edges = sorted(edges, key=lambda item: item[2])
+parent = []
+rank = []
+for node in range(V):
+    parent.append(node)
+    rank.append(0)
+mst_cost = 0
+mst = []
+for u, v, w in edges:
+    x = find(parent, u)
+    y = find(parent, v)
+    if x != y:
+        mst.append((u, v, w))
+        mst_cost += w
+        union(parent, rank, x, y)
+print("Edges in MST:")
+for u, v, w in mst:
+    print(f"{u} - {v} : {w}")
+print("MST Cost =", mst_cost)
