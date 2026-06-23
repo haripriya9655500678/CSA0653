@@ -1,4 +1,4 @@
-# RASIKA C(192421199)
+# HARI PRIYA T(192421223)
 n = int(input("Enter the number of vertices: "))
 print("Enter the adjacency matrix:")
 graph = []
