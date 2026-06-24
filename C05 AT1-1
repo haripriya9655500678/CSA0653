@@ -1,0 +1,21 @@
+# hari priya(192421223)
+jobs = ["J1", "J2", "J3"]
+employees = ["E1", "E2", "E3"]
+assignment = {}
+def schedule(job_index):
+    if job_index == len(jobs):
+        return True
+    job = jobs[job_index]
+    for emp in employees:
+        if emp not in assignment.values():  # Employee handles only one job
+            assignment[job] = emp
+            if schedule(job_index + 1):
+                return True
+            del assignment[job]  # Backtrack
+    return False
+if schedule(0):
+    print("Job Assignments:")
+    for job, emp in assignment.items():
+        print(job, "->", emp)
+else:
+    print("No feasible schedule found")
